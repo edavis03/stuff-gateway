@@ -1,0 +1,11 @@
+applications:
+  - name: stuff-gateway
+    path: build/libs/stuff-gateway-0.0.1-SNAPSHOT.jar
+    buildpacks: 
+      - java_buildpack_offline
+    # health-check-type: http
+    # health-check-http-endpoint: /actuator/health
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+    # services:
+    #   - service-registry
