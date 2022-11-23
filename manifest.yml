@@ -7,5 +7,3 @@ applications:
     # health-check-http-endpoint: /actuator/health
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
-    # services:
-    #   - service-registry
