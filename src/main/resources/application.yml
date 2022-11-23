@@ -3,14 +3,31 @@ spring:
     gateway:
       routes:
       - id: api-route
-        uri: http://stuff-api.apps.internal:8080
+        uri: http://localhost:8080
         predicates:
         - Path=/stuff
+        filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
       - id: frontend-route
-        uri: http://stuff-ui.apps.internal:8080
+        uri: http://localhost:3000
         predicates:
         - Path=/**
-
+        filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: 0oa7d5z3gs4jmavo25d7
+            client-secret: 4pRAVxe5TGtC67NuIf9_z6KdpaKMZEB2kvREuJtQ
+            authorization-grant-type: authorization_code
+            scope: openid,profile,email
+        provider:
+          okta:
+            issuer-uri: https://dev-42225833.okta.com
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
