@@ -24,10 +24,10 @@ spring:
             issuer-uri: https://dev-42225833.okta.com/oauth2/default
         registration:
           okta:
-            # client-id: 0oa7d5z3gs4jmavo25d7
-            client-id: ${vcap.services.my-creds.credentials.OKTA_CLIENT_ID}
-            # client-secret: CKxV1FKO6vtT5FwVpOm3KxnzNUBwcQXU41SbEPEC
-            client-secret: ${vcap.services.my-creds.credentials.OKTA_CLIENT_SECRET}
+            client-id: 0oa7d5z3gs4jmavo25d7
+            # client-id: ${vcap.services.my-creds.credentials.OKTA_CLIENT_ID}
+            client-secret: CKxV1FKO6vtT5FwVpOm3KxnzNUBwcQXU41SbEPEC
+            # client-secret: ${vcap.services.my-creds.credentials.OKTA_CLIENT_SECRET}
             authorization-grant-type: authorization_code
             scope: openid,profile,email
 logging:
@@ -36,6 +36,6 @@ logging:
       cloud.gateway: TRACE
       # http.server.reactive: DEBUG
       # web.reactive: DEBUG
-      security: DEBUG   
+      security: INFO
     # reactor.ipc.netty: DEBUG
     # reactor.netty: DEBUG

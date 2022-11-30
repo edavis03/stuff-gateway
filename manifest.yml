@@ -9,5 +9,6 @@ applications:
     - my-creds
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+      SPRING_PROFILES_ACTIVE: "sso"
       API-ROUTE: http://stuff-api.apps.internal:8080
       UI-ROUTE: http://stuff-ui.apps.internal:8080
