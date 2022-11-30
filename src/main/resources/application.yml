@@ -3,14 +3,14 @@ spring:
     gateway:
       routes:
       - id: api-route
-        uri: http://stuff-api.apps.internal:8080
+        uri: '${API-ROUTE: http://localhost:8080/}'
         predicates:
         - Path=/stuff
         # filters:
         # - TokenRelay=
         # - RemoveRequestHeader=Cookie
       - id: frontend-route
-        uri: http://stuff-ui.apps.internal:8080
+        uri: '${UI-ROUTE: http://localhost:3000/}'
         predicates:
         - Path=/**
         # filters:
