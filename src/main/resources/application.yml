@@ -1,20 +1,35 @@
 spring:
   cloud:
     gateway:
+      default-filters:
+      - TokenRelay
+      - RemoveRequestHeader=Cookie
       routes:
       - id: api-route
-        uri: http://stuff-api.apps.internal:8080
+        uri: '${API_ROUTES_URI: http://localhost:8080/}'
         predicates:
         - Path=/stuff
       - id: frontend-route
-        uri: http://stuff-ui.apps.internal:8080
+        uri: '${UI_ROUTES_URI: http://localhost:3000/}'
         predicates:
         - Path=/**
-
+  security:
+    oauth2:
+      client:
+        provider:
+          okta:
+            issuer-uri:
+        registration:
+          okta:
+          # export CLIENT_ID=xxx
+            client-id: '${vcap.services.test-credhub.credentials.CLIENT_ID:${CLIENT_ID}}'
+            client-secret: '${vcap.services.test-credhub.credentials.CLIENT_SECRET:${CLIENT_SECRET}}'
+            scope: openid,profile,email
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
     org.springframework.http.server.reactive: DEBUG
     org.springframework.web.reactive: DEBUG
+    org.springframework.security: DEBUG
     reactor.ipc.netty: DEBUG
     reactor.netty: DEBUG
