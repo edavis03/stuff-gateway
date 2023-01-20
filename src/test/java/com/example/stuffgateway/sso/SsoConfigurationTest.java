@@ -23,18 +23,19 @@ public class SsoConfigurationTest {
         webClient.get().uri("/").exchange()
             .expectStatus().is3xxRedirection()
             .expectHeader().valueEquals("location", "/oauth2/authorization/okta");
+
         webClient.get().uri("/api").exchange()
             .expectStatus().is3xxRedirection();
     }
 
     @Test
     public void filterChain_shouldRedirectAllUrisToAuthenticateWithPkce() {
-        FluxExchangeResult<String> redirectToOktaResult = webClient.get().uri("oauth2/authorizaiton/okta").exchange()
+        FluxExchangeResult<String> redirectToOktaResult = webClient.get().uri("/oauth2/authorization/okta").exchange()
             .expectStatus().is3xxRedirection()
             .returnResult(String.class);
 
         String locationHeader = redirectToOktaResult.getResponseHeaders().get("location").get(0);
-        assertThat(locationHeader).contains("okta/url");
+        assertThat(locationHeader).contains("https://dev-42225833.okta.com/oauth2/v1/authorize?response_type=code&client_id=");
         assertThat(locationHeader).contains("code_challenge");
     }
 }

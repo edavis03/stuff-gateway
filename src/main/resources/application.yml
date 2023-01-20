@@ -18,12 +18,12 @@ spring:
       client:
         provider:
           okta:
-            issuer-uri:
+            issuer-uri: https://dev-42225833.okta.com
         registration:
           okta:
           # export CLIENT_ID=xxx
-            client-id: '${vcap.services.test-credhub.credentials.CLIENT_ID:${CLIENT_ID}}'
-            client-secret: '${vcap.services.test-credhub.credentials.CLIENT_SECRET:${CLIENT_SECRET}}'
+            client-id: '${vcap.services.test-credhub.credentials.CLIENT_ID:0oa7d5z3gs4jmavo25d7}'
+            client-secret: '${vcap.services.test-credhub.credentials.CLIENT_SECRET:CKxV1FKO6vtT5FwVpOm3KxnzNUBwcQXU41SbEPEC}'
             scope: openid,profile,email
 logging:
   level:
